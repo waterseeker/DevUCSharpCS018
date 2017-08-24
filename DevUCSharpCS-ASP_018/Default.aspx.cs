@@ -11,7 +11,23 @@ namespace DevUCSharpCS_ASP_018
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            myTextBox.Text = 500.ToString();
+        }
 
+        protected void okButton_Click(object sender, EventArgs e)
+        {
+            if (firstCalendar.SelectedDate.AddDays(15) >= secondCalendar.SelectedDate)
+            {
+                TimeSpan elapsedDays = firstCalendar.SelectedDate.Subtract(secondCalendar.SelectedDate);
+                double userValue = double.Parse(myTextBox.Text);
+                double days = elapsedDays.TotalDays;
+                double sum = userValue * days + 100;
+                resultLabel.Text = sum.ToString();
+            }
+            else
+            {
+                resultLabel.Text = "Error. You must choose a date at least 14 days apart.";
+            }
         }
     }
 }
